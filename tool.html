@@ -1,0 +1,41 @@
+---
+id: 493
+title: Tool
+date: 2016-05-24T10:34:58+00:00
+author: 李朝
+layout: page
+guid: http://www.itmeats.com/?page_id=493
+---
+<a href="http://jsbeautifier.org" target="_blank">html/js/json在线格式化（jsbeautifier）</a>
+<br/>
+<br/>
+<br/>
+
+  
+<a href="http://tool.oschina.net/jscompress" target="_blank">html/js/json在线压缩、格式化（oschina）</a>
+
+<br/>
+<br/>
+<br/>
+
+<a href="javascript:;" onclick="openMyHtml()">收益计算</a>
+<script>
+function openMyHtml(){window.open().document.write("\<head>\<meta charset=\"UTF-8\">\<script>document.write(\"  \
+<table>\
+<tr>\
+<td>\<select id='saveType'>\<option value='0'>一次性存入:\<\/option>\<option value='1'>每月固定存入:\<\/option>\<option value='2'>每天固定存入\<\/option>\<\/select>\<\/td>\
+<td>\<input id='jarvis_init' value='300000'>元\<\/td>\<\/tr>\
+<tr>\
+<td>期限：\<\/td>\
+<td>\<input id='timeNum' value='30'>\<select id='unit'>\<option value='0'>年\<\/option>\<option value='1'>月\<\/option>\<option value='2'>日\<\/option>\<\/select>\<\/td>\<\/tr>\
+<tr>\
+<td>收益类型：\<\/td>\
+<td>\<input type='radio' id='jarvis_wan_radio' name='type' value='0' onclick='changeModel(this)' checked='true'>每万份收益|\<input type='radio' id='jarvis_yr_radio' name='type' value='1' onclick='changeModel(this)'>年化受益率\<\/td>\<\/tr>\
+<tr>\
+<td id='jarvis_benefit_td'>万份收益：\<\/td>\
+<td>\<input id='jarvis_benefit' value='1.6'>\<\/td>\<\/tr>\
+<tr>\
+<td colspan='2'>\<input type='button' value='ok' onclick='submit();'>\<\/td>\<\/tr>\
+<tr>\
+<td colspan='2'>计算结果(元)：\<span id='jarvis_res'>点击ok获取计算结果\<\/span>\<\/td>\<\/tr>\<\/table>\");	function submit(){var init=parseInt($('jarvis_init').value);var drate;var timeNum=$('timeNum').value;var days;switch($('unit').value){case'0':days=parseInt(timeNum*365);break;case'1':days=parseInt(timeNum*30);break;case'2':days=timeNum;break}var isWanFen=$('jarvis_wan_radio').checked;if(isWanFen){wan=parseFloat($('jarvis_benefit').value);drate=(wan/10000)}else{var yrate=parseFloat($('jarvis_benefit').value);drate=Utils.yearRateToWanFen(yrate)/10000}switch($('saveType').value){case'0':onceSaveType(init,days,drate);break;case'1':everyMonthType(init,days,drate);break;case'2':everyDayType(init,days,drate);break}}function everyDayType(init,days,drate){var totals=0;for(var i=0;i<days;i++){totals=Utils.countD(totals,drate)+init}$('jarvis_res').innerHTML=totals}function onceSaveType(init,days,drate){var total;total=Utils.countAllByWanRate(init,days,drate);$('jarvis_res').innerHTML=total}function everyMonthType(init,days,drate){var total=0;for(var i=0;i<days;i++){if(Utils.assertNewMonth(i)){total=Utils.countD(total,drate)+init}else{total=Utils.countD(total,drate)}}$('jarvis_res').innerHTML=total}function changeModel(o){switch(o.value){case'0':showWanFen();break;case'1':showNianHua();break}}window.isWanFen=true;function showWanFen(){if(!window.isWanFen){window.isWanFen=true}else{return}$('jarvis_benefit_td').innerHTML='万份收益:';var val=parseFloat($('jarvis_benefit').value);if(val){$('jarvis_benefit').value=Utils.yearRateToWanFen(val)}}function showNianHua(){if(window.isWanFen){window.isWanFen=false}else{return}$('jarvis_benefit_td').innerHTML='年化受益率:';var val=parseFloat($('jarvis_benefit').value);if(val){$('jarvis_benefit').value=Utils.wanFenToYearRate(val)}}function $(id){return document.getElementById(id)}function selectSaveType(o){switch(o.value){case'0':showEveryMonth();break;case'1':showOnce();break;case'2':showEveryDay();break}}var Utils={wanFenToYearRate:function(wan){return Math.pow(1+wan/10000,365)-1},yearRateToWanFen:function(yr){return(Math.pow((yr+1),(1/365))-1)*10000},assertNewMonth:function(day){var day_=day%365;var md=[0,31,59,90,120,151,181,212,243,273,304,334];for(var i in md){if(md[i]==day_){return true}}return false},countD:function(base,dr){return base+=base*dr},countAllByWanRate:function(b,ds,dr){return b*(Math.pow(1+dr,ds))}};\<\/script>\<\/head>");}
+</script>
