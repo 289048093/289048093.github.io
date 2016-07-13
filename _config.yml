@@ -9,7 +9,7 @@ owner:
   avatar:         avatar.png
   bio:            "Aesthete & Athlete"
   email:          geniuslizhao@gmail.com
-  weibo:        geniuslizhao
+  weibo:          geniuslizhao
   github:         289048093
 #  dribbble:       coletownsend
   disqus:         itmeats
@@ -36,7 +36,10 @@ links:
 timezone:    Asia/Shanghai
 future:      true
 highlighter: pygments
-markdown:    kramdown
+
+markdown: redcarpet
+redcarpet:
+    extensions: [ "fenced_code_blocks", "hard_wrap","autolink", "tables", "strikethrough", "superscript", "with_toc_data", "highlight", "prettify","no_intra_emphasis"]
 
 kramdown:
   auto_ids: true
