@@ -37,9 +37,9 @@ timezone:    Asia/Shanghai
 future:      true
 highlighter: pygments
 
-markdown: redcarpet
-redcarpet:
-    extensions: [ "fenced_code_blocks", "hard_wrap","autolink", "tables", "strikethrough", "superscript", "with_toc_data", "highlight", "prettify","no_intra_emphasis"]
+#markdown: redcarpet
+#redcarpet:
+#    extensions: [ "fenced_code_blocks", "hard_wrap","autolink", "tables", "strikethrough", "superscript", "with_toc_data", "highlight", "prettify","no_intra_emphasis"]
 
 kramdown:
   auto_ids: true
