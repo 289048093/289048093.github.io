@@ -1,10 +1,18 @@
 {% include head-dark.html %}
 
 <div id='bump'>
+    <div style="position:absolute;fload:left; margin: 200px 5.5%;">
+        <h4>分类列表</h4>
+        <hr>
+        {% for category in site.categories %}
+        <li class="category_list_item"><a href="/showCategory.html?categoryName={{ category | first }}">{{ category | first }}</a> ({{ category | last | size }})
+        </li>
+        {% endfor %}
+    </div>
     <section class="article archive">
         <article class="archive-wrap">
             <ol class="post-list">
-                <lh><h2><span class="bb">{{ page.title }}</span></h2></lh>
+                <lh><h2><span class="bb">{{ page.title }}<span style="font-size: small"> 知之者不如好之者，好之者不如乐知者</span></span></h2></lh>
                 <!--{% for post in site.posts %}-->
                 <!--<li>-->
                 <!--<div class="deets" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">-->
