@@ -68,3 +68,5 @@ exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.
 gems: [jekyll-paginate]
 paginate: 5
 paginate_path: "/page:num/"
+
+markdown: kramdown
