@@ -1,7 +1,9 @@
 title:            ITMEATS
 tagline:          A beautiful theme.
 description:      Describe your website.
-canonical: http://jekyll.gtat.me
+canonical: http://itmeats.com
+
+blog_version:{blog_version}
 
 # Owner/author information
 owner:

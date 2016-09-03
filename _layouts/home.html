@@ -5,7 +5,7 @@
         <h4>分类列表</h4>
         <hr>
         {% for category in site.categories %}
-        <li class="category_list_item"><a href="/showCategory.html?categoryName={{ category | first }}">{{ category | first }}</a> ({{ category | last | size }})
+        <li class="category_list_item"><a href="/showCategory.html?_v={{blog_version}}&categoryName={{ category | first }}">{{ category | first }}</a> ({{ category | last | size }})
         </li>
         {% endfor %}
     </div>
@@ -28,7 +28,7 @@
                 {% for post in paginator.posts %}
                 <li>
                     <div class="deets" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
-                        <h1><a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a></h1>
+                        <h1><a href="{{ site.url }}{{ post.url }}?_v={{ blog_version }}">{{ post.title }}</a></h1>
                         <p class="date">
                             <time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">{{ post.date |
                                 date: "%B %d, %Y" }}
@@ -47,13 +47,13 @@
             <h4>
                 <div class="pagination post-list">
                     {% if paginator.previous_page %}
-                    <a href="{{ paginator.previous_page_path }}" class="previous">Previous</a>
+                    <a href="{{ paginator.previous_page_path }}?_v={{ blog_version }}" class="previous">Previous</a>
                     {% else %}
                     <span class="previous">Previous</span>
                     {% endif %}
                     <span class="page_number ">Page: {{ paginator.page }} / {{ paginator.total_pages }}</span>
                     {% if paginator.next_page %}
-                    <a href="{{ paginator.next_page_path }}" class="next">Next</a>
+                    <a href="{{ paginator.next_page_path }}?_v={{ blog_version }}" class="next">Next</a>
                     {% else %}
                     <span class="next ">Next</span>
                     {% endif %}

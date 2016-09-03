@@ -1,0 +1,28 @@
+language: ruby
+rvm:
+- 2.2
+os:
+- linux
+sudo: required
+cache:
+  bundler: true
+  apt: true
+  directories:
+  - "$HOME/.download"
+env:
+  global:
+  - secure: WX5sYybqnKKeRpioTshvJgbLWqcybz+qav6Dw8GL6LYVayHIJ92GVPfgAzBZojbkleJHXY+VC65pneVsUcYVIPu4nLaPxWmnYDZr214ClzD6YrLASG0sKGKYT15AL2R0oTwXYlhH9TKj5MAd1SL33VK/GqErGcwMjV93WnqcLoVliBRd6nyfN6mqzjrTHP5USATSj0m5GNQpqujiXrTBabeTkwE65jUgWi3rEXje4HC5D2anM78PHQaVTaKkcCl12reCHiJuCRKKw6sF0MhGfF/APneV2/wNMBiVyvPIh6gH0ONJwUPVkGvtpjn87YOZRvO9FGLa+VLYWt1gcjWv16rWlkhuWjsQdhuJKCgUyjj/xYGw9R1GebbwbZodU8CTrCOP8sWUyrX7guGOMtsuyLhvrTwdvslfwthaFLSvPVgiNMjeNwvc6BZVx7Qboudu75V1oKNkxOHyvmNH2ocUL972PWGyahJidGJvw75AVhVqe94dADK7kaKFVKrmFndh5H398nv+DC08PhIu8BRY+qe0ANZg7EQfh239lO8jbSu53yABPaOtY7Zt3eB5mXX0I8XuvaRJhIUYf756vmG0BwBLOM3tJ5fXMBswPBk4iLBtnozmf4XXd2OpHtzwIdjmZ+tTk0hXuNw3/HGkj5wIHwwhS1D37S9gQPGxZgkGPNU=
+  - secure: v9LFkTI6hR8+D2V6UqhFE3i2XxJyfDNZ9XEAzIxbqs8hDrUrxAi+E19P5rg7ddDySw7+lw29saztsfyaM6cPyhVwwVwoD2RnUjS69QbXvnJ9iGvyzHMQ3AQx+XIKpBuBxyiLrvRfWagV3YAxRIb28vABOJFrNqXZVqLxYpno4E3gBvJ5At19x1KVjj+KL38c0/kEpQEXidFg/5H47PsowKSuSeKudZLJigiyEHiDVZb6Ibzm6H0DNqhYlu7S4b5rQs4FjHzra69XzsLTUwK0PAK+MWXAnA4Vcmj8xD/Gf58eG1ftdx26bZKVdsvbuuphCoiVuDL3JU7cBe3IIe4d7gEWRA+OPfSUbVELxkFRBdSzLOz1FgUvTfikZiG/sGI4IkbHmc3nfe+hVwBurEZGC0ow2rFYZPfa2nRFjyof0atcdlS/7lrR5W52znPeJHLQJb5jXpwOG7n10YL6YYgN5aZRMuxmmOkr3HZd6GDc3jU+gDFGGKRD4nLRTBVmGoMv2csONRn1E+e51R81fur2tzF5UpVnuyxPnvE5tB8lKaGMiKyfZL0hhWY1dhvof4UeCcFIjtE6WjRtMexkVkwc2Som1vlX4lOVJeRSbd+MHLMKQe7OWXwFsca3SyW+s9TMsl3C+hILwngbuORg+npwGweVNROLjhuvIt04U35F21w=
+before_install:
+- gem install jekyll
+install:
+- if [ ! -e $HOME/.download ];then mkdir $HOME/.download;fi;
+- wget -O $HOME/.download/qshell https://raw.githubusercontent.com/289048093/mvn/master/qiniu/qshell_linux_amd64
+- sed -i "s/{{blog_version}}/$TRAVIS_BUILD_NUMBER/g" $TRAVIS_BUILD_DIR/_config.yml
+- jekyll build
+- chmod +x $HOME/.download/qshell
+- "$HOME/.download/qshell account $QINIU_KEY $QINIU_SECRET"
+- echo  '{"src_dir":"'$TRAVIS_BUILD_DIR'/_site","access_key":"'$QINIU_KEY'","secret_key":"'$QINIU_SECRET'","bucket":"'itmeats-com'","overwrite":true,"check_exists":true,"check_hash":true,"up_host":"http://up.qiniug.com"}'
+ >  $HOME/qiniu_config
+script:
+- "$HOME/.download/qshell qupload 3 $HOME/qiniu_config"
